@@ -1,0 +1,28 @@
+{
+  "name": "handson-horizon",
+  "version": "1.0.0",
+  "description": "HandsOn de NodeJS, CRUD com MySql",
+  "main": "index.js",
+  "bin": {
+    "handson-horizon": "server.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavofvieira/HandsOn-Horizon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustavofvieira/HandsOn-Horizon/issues"
+  },
+  "homepage": "https://github.com/gustavofvieira/HandsOn-Horizon#readme",
+  "dependencies": {
+    "knex": "^0.19.1",
+    "mysql": "^2.17.1",
+    "restify": "^8.3.3",
+    "restify-errors": "^8.0.0"
+  }
+}
