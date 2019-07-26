@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Jul-2019 às 22:45
--- Versão do servidor: 10.3.16-MariaDB
--- versão do PHP: 7.1.30
+-- Generation Time: 26-Jul-2019 às 16:14
+-- Versão do servidor: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `handson-hzn`
+-- Database: `handson-hzn`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,20 @@ CREATE TABLE `bateria` (
   `id` int(11) NOT NULL,
   `surfista_id1` int(3) NOT NULL,
   `surfista_id2` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `nota`
+--
+
+CREATE TABLE `nota` (
+  `id` int(3) NOT NULL,
+  `nota1` float NOT NULL,
+  `nota2` float NOT NULL,
+  `nota3` float NOT NULL,
+  `ondaId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -59,48 +73,67 @@ CREATE TABLE `surfista` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Índices para tabelas despejadas
+-- Extraindo dados da tabela `surfista`
+--
+
+INSERT INTO `surfista` (`id`, `nome`, `pais`) VALUES
+(1, 'coisinho', 'brasil');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `bateria`
+-- Indexes for table `bateria`
 --
 ALTER TABLE `bateria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `onda`
+-- Indexes for table `nota`
+--
+ALTER TABLE `nota`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `onda`
 --
 ALTER TABLE `onda`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `surfista`
+-- Indexes for table `surfista`
 --
 ALTER TABLE `surfista`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `bateria`
+-- AUTO_INCREMENT for table `bateria`
 --
 ALTER TABLE `bateria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `onda`
+-- AUTO_INCREMENT for table `nota`
+--
+ALTER TABLE `nota`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `onda`
 --
 ALTER TABLE `onda`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `surfista`
+-- AUTO_INCREMENT for table `surfista`
 --
 ALTER TABLE `surfista`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
