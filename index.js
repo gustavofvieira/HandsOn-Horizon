@@ -1,9 +1,13 @@
 const restify = require('restify');
 
+
 const server = restify.createServer({
   name: 'myapp',
   version: '1.0.0'
 });
+
+const cors = require('cors');
+server.use(cors());//cors vazio para qualquer cliente que quiser acessar a requisição ter acesso.
 
 var knex = require('knex')({
     client: 'mysql',
