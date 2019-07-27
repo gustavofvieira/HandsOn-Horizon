@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26-Jul-2019 às 16:14
+-- Generation Time: 27-Jul-2019 às 19:29
 -- Versão do servidor: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -31,7 +31,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `bateria` (
   `id` int(11) NOT NULL,
   `surfista_id1` int(3) NOT NULL,
-  `surfista_id2` int(3) NOT NULL
+  `surfista_id2` int(3) NOT NULL,
+  `vencedor_srf1` tinyint(1) NOT NULL,
+  `vencedor_srf2` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -57,7 +59,7 @@ CREATE TABLE `nota` (
 CREATE TABLE `onda` (
   `id` int(3) NOT NULL,
   `BateriaId` int(3) NOT NULL,
-  `SurfistaId` int(3) NOT NULL
+  `tipo_onda` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -87,19 +89,23 @@ INSERT INTO `surfista` (`id`, `nome`, `pais`) VALUES
 -- Indexes for table `bateria`
 --
 ALTER TABLE `bateria`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `surfista_id1` (`surfista_id1`),
+  ADD KEY `surfista_id2` (`surfista_id2`);
 
 --
 -- Indexes for table `nota`
 --
 ALTER TABLE `nota`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ondaId` (`ondaId`);
 
 --
 -- Indexes for table `onda`
 --
 ALTER TABLE `onda`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `BateriaId` (`BateriaId`);
 
 --
 -- Indexes for table `surfista`
@@ -134,6 +140,29 @@ ALTER TABLE `onda`
 --
 ALTER TABLE `surfista`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `bateria`
+--
+ALTER TABLE `bateria`
+  ADD CONSTRAINT `bateria_ibfk_1` FOREIGN KEY (`surfista_id1`) REFERENCES `surfista` (`id`),
+  ADD CONSTRAINT `bateria_ibfk_2` FOREIGN KEY (`surfista_id2`) REFERENCES `surfista` (`id`);
+
+--
+-- Limitadores para a tabela `nota`
+--
+ALTER TABLE `nota`
+  ADD CONSTRAINT `nota_ibfk_1` FOREIGN KEY (`ondaId`) REFERENCES `onda` (`id`);
+
+--
+-- Limitadores para a tabela `onda`
+--
+ALTER TABLE `onda`
+  ADD CONSTRAINT `onda_ibfk_1` FOREIGN KEY (`BateriaId`) REFERENCES `bateria` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
