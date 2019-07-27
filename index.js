@@ -1,9 +1,13 @@
 const restify = require('restify');
 
+
 const server = restify.createServer({
   name: 'myapp',
   version: '1.0.0'
 });
+
+const cors = require('cors');
+server.use(cors());//cors vazio para qualquer cliente que quiser acessar a requisição ter acesso.
 
 var knex = require('knex')({
     client: 'mysql',
@@ -28,7 +32,7 @@ server.listen(8080, function () {
 
 //Inicio Rotas Surfista
 server.get('/surfista', (req, res, next) => {
-  knex('surfista').then((dados)=> { // rest é o nome da tabela no banco
+  knex('surfista').then((dados)=> {  
       res.send(dados);
   }, next)
 
@@ -38,8 +42,8 @@ server.get('/surfista', (req, res, next) => {
 server.post('/surfista/create', (req, res, next) => {
   knex('surfista')
       .insert(req.body)
-      .then((dados)=> { // rest é o nome da tabela no banco
-      res.send(dados); // dados vai receber o id que foi criado no insert
+      .then((dados)=> {  
+      res.send(dados);  
   }, next)
 
 });
@@ -50,7 +54,7 @@ server.get('/surfista/show/:id', (req, res, next) => {
   knex('surfista')
   .where('id', id)
   .first()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send(dados);
   }, next)
@@ -63,7 +67,7 @@ server.put('/surfista/update/:id', (req, res, next) => {
   knex('surfista')
   .where('id', id)
   .update(req.body)
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados atualizados');
   }, next)
@@ -76,7 +80,7 @@ server.del('/surfista/delete/:id', (req, res, next) => {
   knex('surfista')
   .where('id', id)
   .delete()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados excluidos');
   }, next)
@@ -86,7 +90,7 @@ server.del('/surfista/delete/:id', (req, res, next) => {
 
 //Inicio Rotas Bateria
 server.get('/bateria', (req, res, next) => {
-  knex('bateria').then((dados)=> { // rest é o nome da tabela no banco
+  knex('bateria').then((dados)=> {  
       res.send(dados);
   }, next)
 
@@ -96,8 +100,8 @@ server.get('/bateria', (req, res, next) => {
 server.post('/bateria/create', (req, res, next) => {
   knex('bateria')
       .insert(req.body)
-      .then((dados)=> { // rest é o nome da tabela no banco
-      res.send(dados); // dados vai receber o id que foi criado no insert
+      .then((dados)=> {  
+      res.send(dados);  
   }, next)
 
 });
@@ -108,7 +112,7 @@ server.get('/bateria/show/:id', (req, res, next) => {
   knex('bateria')
   .where('id', id)
   .first()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send(dados);
   }, next)
@@ -121,7 +125,7 @@ server.put('/bateria/update/:id', (req, res, next) => {
   knex('bateria')
   .where('id', id)
   .update(req.body)
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados atualizados');
   }, next)
@@ -134,7 +138,7 @@ server.del('/bateria/delete/:id', (req, res, next) => {
   knex('bateria')
   .where('id', id)
   .delete()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados excluidos');
   }, next)
@@ -144,7 +148,7 @@ server.del('/bateria/delete/:id', (req, res, next) => {
 
 //Inicio Rotas Nota
 server.get('/nota', (req, res, next) => {
-  knex('nota').then((dados)=> { // rest é o nome da tabela no banco
+  knex('nota').then((dados)=> {  
       res.send(dados);
   }, next)
 
@@ -154,8 +158,8 @@ server.get('/nota', (req, res, next) => {
 server.post('/nota/create', (req, res, next) => {
   knex('nota')
       .insert(req.body)
-      .then((dados)=> { // rest é o nome da tabela no banco
-      res.send(dados); // dados vai receber o id que foi criado no insert
+      .then((dados)=> {  
+      res.send(dados);  
   }, next)
 
 });
@@ -166,7 +170,7 @@ server.get('/nota/show/:id', (req, res, next) => {
   knex('nota')
   .where('id', id)
   .first()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send(dados);
   }, next)
@@ -179,7 +183,7 @@ server.put('/nota/update/:id', (req, res, next) => {
   knex('nota')
   .where('id', id)
   .update(req.body)
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados atualizados');
   }, next)
@@ -192,7 +196,7 @@ server.del('/nota/delete/:id', (req, res, next) => {
   knex('nota')
   .where('id', id)
   .delete()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados excluidos');
   }, next)
@@ -202,7 +206,7 @@ server.del('/nota/delete/:id', (req, res, next) => {
 
 //Inicio Rotas Onda
 server.get('/onda', (req, res, next) => {
-  knex('onda').then((dados)=> { // rest é o nome da tabela no banco
+  knex('onda').then((dados)=> {  
       res.send(dados);
   }, next)
 
@@ -212,8 +216,8 @@ server.get('/onda', (req, res, next) => {
 server.post('/onda/create', (req, res, next) => {
   knex('onda')
       .insert(req.body)
-      .then((dados)=> { // rest é o nome da tabela no banco
-      res.send(dados); // dados vai receber o id que foi criado no insert
+      .then((dados)=> {  
+      res.send(dados);  
   }, next)
 
 });
@@ -224,7 +228,7 @@ server.get('/onda/show/:id', (req, res, next) => {
   knex('onda')
   .where('id', id)
   .first()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send(dados);
   }, next)
@@ -237,7 +241,7 @@ server.put('/onda/update/:id', (req, res, next) => {
   knex('onda')
   .where('id', id)
   .update(req.body)
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados atualizados');
   }, next)
@@ -250,7 +254,7 @@ server.del('/onda/delete/:id', (req, res, next) => {
   knex('onda')
   .where('id', id)
   .delete()
-  .then((dados)=> { // rest é o nome da tabela no banco
+  .then((dados)=> {  
       if(!dados) return res.send(new errs.BadRequestError('nada foi encontrado'));
       res.send('dados excluidos');
   }, next)
